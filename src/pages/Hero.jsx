@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import Stripes from "../components/Stripes";
-import   yel from '../assets/productImages/yelback.jpg'
+import yel from '../assets/productImages/yelback.jpg'
+import { Fet } from "../components/UserLink";
 const Hero = () => {
   return (
     <>
@@ -29,6 +30,7 @@ const Hero = () => {
           {" "}
           <Stripes />
         </div>
+        <Fet/>
       </section>
     </>
   );

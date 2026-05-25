@@ -11,12 +11,12 @@ const About = () => {
         </h1>
         <div className="capitalize px-10 text-xl font-medium  py-10 ">
           <p>
-            folly we are commited to deliver quality ,affordable clothings to
+            folly we are committed to deliver quality ,affordable clothings to
             all our dearest customers . we maintain better relationship with our
             customers of large-bulk sales.
           </p>
           <p>
-            at Folly we are passionate about what we do bcos it driven by
+            at Folly we are passionate about what we do because it driven by
             innovative design, desired to help us make our impact of uniqueness
             in customer clothing.
           </p>
@@ -85,7 +85,7 @@ const About = () => {
       </div>
       <div className=" w-full p-2 md:p-5 items-center text-center sticky bottom-0 right-0 text-sm bg-slate-200 border-t">
         <span className="font-semibold m-auto">
-          partner with us for bulk product purshase :{" "}
+          partner with us for bulk product purchase :{" "}
           <span className="text-xm font-bold block md:inline">+234 8021289677</span>{" "}
         </span>
         <button className="md:p-3 p-2 text-center items-center border-none rounded ml-10 hover:bg-amber-600 hover:shadow-xl  bg-amber-400 text-white cursor-pointer transition-all">
