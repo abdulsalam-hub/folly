@@ -2,19 +2,19 @@ import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import Stripes from "../components/Stripes";
 import yel from '../assets/productImages/yelback.jpg'
-import { Fet } from "../components/UserLink";
+
 const Hero = () => {
   return (
     <>
       <NavBar />
       <section
-        className="h-screen w-full backdrop-blur-xl flex items-center  bg-no-repeat object-center md:object-contain md:bg-top-right  bg-cover  bg-[url(assets/productImages/track.jpeg)] md:bg-[url(assets/productImages/yelback.jpg)]"
+        className="h-screen w-full backdrop-blur-xl flex items-center  bg-no-repeat object-center md:object-contain md:bg-top-right  bg-cover  bg-center bg-[url(assets/productImages/track.jpeg)] md:bg-[url(assets/productImages/yelback.jpg)]"
         style={{
           backgroundImage: yel
         }}
       >
-        <div className="">
-          <h1 className="ml-3 md:mx-auto  md:text-center font-extrabold text-[min(10vw,48px)] bg-linear-to-r from-purple-700 to-orange-500 bg-clip-text text-transparent  md:max-w-[800px] ">
+        <div className="md:flex flex-col items-center justify-center">
+          <h1 className="ml-3 md:mx-auto  md:text-center font-extrabold text-[clamp(2rem,2vw,4rem)] bg-linear-to-r from-purple-700 to-orange-500 bg-clip-text text-transparent  md:max-w-[800px] ">
             A best place to shop your fashion at comfort.
           </h1>
           <div className="flex justify-around gap-x-10 mt-10">
@@ -26,11 +26,11 @@ const Hero = () => {
             </button>
           </div>
         </div>
-        <div className="z-50 top- relative ">
-          {" "}
+        <div className="z-50 relative ">
+        
           <Stripes />
         </div>
-        <Fet/>
+       
       </section>
     </>
   );

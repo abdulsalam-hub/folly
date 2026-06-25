@@ -5,13 +5,33 @@ import NavBar from "./NavBar.jsx";
 
 const Contact=() =>
 {
-  const handleCare=() => alert(`your request is been set successfully ! ,
-    will  give feedback soon.`)
+  const notify=Notification.requestPermission().then((permission) =>
+  {
+    if (permission === "granted") {
+      return new Notification("Folly ventures", {
+        body: "your request is been submitted.",
+        icon: "public/th.jpg"
+      });
+    } else {
+      return;
+    }
+  }
+  
+  ).finally(() =>
+  {
+window.onclick(()=>window.location.pathname='/src/pages/Contact.jsx')
+  })
+  const handleCare=() =>
+  {
+    alert(`your request is been set successfully ! ,
+    will  give feedback soon.`);
+  notify()
+  }
   return (
     <>
       <NavBar />
-      <div className="py-20 px-10 text-center items-center flex flex-col justify-center  overflow-auto">
-        <h1 className="text-center text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-amber-300 to-purple-500 leading-normal ">
+      <div className="py-20 px-2 text-center items-center flex flex-col justify-center ">
+        <h1 className=" text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-amber-300 to-purple-500 leading-normal ">
           contact us
         </h1>
         <p className="text-sm font-light font-mono">
