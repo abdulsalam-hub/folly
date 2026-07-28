@@ -1,11 +1,19 @@
 
 
+
 import Footer from "../components/Footer.jsx";
 import NavBar from "./NavBar.jsx";
 
 const Contact=() =>
 {
-  const notify=Notification.requestPermission().then((permission) =>
+ 
+  
+
+
+  const handleCare=(ev) =>
+  {
+    ev.preventDefault();
+Notification.requestPermission().then((permission) =>
   {
     if (permission === "granted") {
       return new Notification("Folly ventures", {
@@ -14,31 +22,22 @@ const Contact=() =>
       });
     } else {
       return;
-    }
-  }
-  
-  ).finally(() =>
-  {
-window.onclick(()=>window.location.pathname='/src/pages/Contact.jsx')
+    };
+    
   })
-  const handleCare=() =>
-  {
-    alert(`your request is been set successfully ! ,
-    will  give feedback soon.`);
-  notify()
   }
   return (
     <>
       <NavBar />
       <div className="py-20 px-2 text-center items-center flex flex-col justify-center ">
-        <h1 className=" text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-amber-300 to-purple-500 leading-normal ">
+        <h1 className=" text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-amber-300 to-purple-500 leading-normal mb-5">
           contact us
         </h1>
-        <p className="text-sm font-light font-mono">
+        <p className="text-sm font-light font-mono py-5">
           want to partner with us more !, notify us .feel free to tell us
           improve we hear you .{" "}
         </p>
-        <fieldset className=" m-auto md:px-20 rounded-xl border border-amber-300">
+        <fieldset className=" m-auto md:px-2  w-[90%] md:w-130 h-auto  py-8 rounded-xl border border-amber-300">
           {" "}
           <legend className="text-purple-300 font-semibold">request</legend>
           <form action="" onSubmit={handleCare} className="m-auto px-3">
@@ -91,7 +90,7 @@ window.onclick(()=>window.location.pathname='/src/pages/Contact.jsx')
               className="outline-none border mt-4 rounded  indent-5 p-3 w-full  focus:shadow-xl transition-all duration-500 ease-in-out"
             ></textarea>
             <button
-              onClick={handleCare}
+             
               type="submit"
               className="w-full my-2 md:py-3 md:text-2xl bg-purple-400 rounded-xl items-center py-1 shadow-xl transition-all duration-500 ease-in-out font-semibold text-xl"
             >

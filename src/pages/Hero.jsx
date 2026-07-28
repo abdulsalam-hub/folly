@@ -8,16 +8,16 @@ const Hero = () => {
     <>
       <NavBar />
       <section
-        className="h-screen w-full backdrop-blur-xl flex items-center  bg-no-repeat object-center md:object-contain md:bg-top-right  bg-cover  bg-center bg-[url(assets/productImages/track.jpeg)] md:bg-[url(assets/productImages/yelback.jpg)]"
+        className="h-screen w-full backdrop-blur-xl  flex items-center  bg-no-repeat object-center md:object-contain md:bg-top-right  bg-cover bg-[url(assets/productImages/track.jpeg)] md:bg-[url(assets/productImages/yelback.jpg)]"
         style={{
           backgroundImage: yel
         }}
       >
         <div className="md:flex flex-col items-center justify-center">
-          <h1 className="ml-3 md:mx-auto  md:text-center font-extrabold text-[clamp(2rem,2vw,4rem)] bg-linear-to-r from-purple-700 to-orange-500 bg-clip-text text-transparent  md:max-w-[800px] ">
+          <h1 className="ml-3 md:mx-auto  md:text-center font-extrabold text-[clamp(3.2rem,2vw,5.5rem)]  bg-linear-to-r from-purple-700 to-orange-500 bg-clip-text text-transparent  md:max-w-[800px] ">
             A best place to shop your fashion at comfort.
           </h1>
-          <div className="flex justify-around gap-x-10 mt-10">
+          <div className="flex  items-center justify-around gap-x-10 md:mt-18 mt-12">
             <button className="hover:shadow-[0_3px_8px_rgba(255,0,255,0.2)] hover:bg-transparent hover:text-amber-300 capitalize font-bold h-12 w-25 rounded-[50px] border-b-purple-800 hover:-bg-transparent  text-white bg-amber-500">
               <Link to="/products"> shop now</Link>
             </button>

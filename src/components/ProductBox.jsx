@@ -7,7 +7,7 @@ const ProductBox = ({id,image,product,price,category,isStocked,pro,color,wish}) 
   
   const {addCart} =useContext(ProductContext);
     return (
-      <div className="my-2 h-auto border hover:shadow-xl w-auto border-amber-600 rounded-lg hover:translate-0.5 transition-all">
+      <div className="my-2 h-auto max-h-90 min-h-60   border hover:shadow-xl overflow-hidden w-auto border-amber-600 rounded-lg hover:translate-0.5 transition-all">
         <Link to={`/folly/${id}`}>
           {" "}
           <img
@@ -20,20 +20,20 @@ const ProductBox = ({id,image,product,price,category,isStocked,pro,color,wish}) 
         </Link>
 
         <div className="w-full h-[32%] px-2">
-          <div className=" w-full ">
-            <h4 className="font-bold  font-sans text-[clamp(1rem,2vw,1.5rem)] capitalize">
+          <div className=" w-full py-2 ">
+            <h4 className="font-bold text-center font-sans text-[clamp(1.3rem,2vw,1.5rem)] capitalize">
               {product}
             </h4>
           </div>
-          <div className="flex justify-between text-xm">
-            <h4 className="font-semibold font-sans text-[15px] text-black-600">
+          <div className="flex justify-between  items-center">
+            <h4 className="font-semibold font-sans text-[18px] text-black-600">
               ${price}
             </h4>
 
             <span>
               <Heart
                 name="heart"
-                className={`w-5 h-5 cursor-pointer text-amber-500 ${
+                className={`w-5 h-5 cursor-pointer  text-xm text-amber-500 ${
                   color && "fill-red-500"
                 }`}
                 onClick={() => wish(id)}
@@ -64,9 +64,10 @@ const ProductBox = ({id,image,product,price,category,isStocked,pro,color,wish}) 
         <button
           title="add to cart"
           onClick={() => addCart(pro, id)}
-          className="bg-purple-600  w-full flex items-center   mx-auto cursor-pointer text-xs justify-center mt-3.5 py-2 font-bold text-amber-500  text-center  font-[sans-serif,tahoma] transition-all  rounded-[5px] hover:scale-102"
+          className="bg-purple-600  w-[90%] flex items-center   mx-auto cursor-pointer text-xs justify-center mt-3.5 py-2 font-bold text-amber-500  text-center  font-[sans-serif,tahoma] transition-all  rounded-[5px] hover:scale-102"
         >
-          <ShoppingBasket className="w-5 h-5 mr-2 font-bold" /> <span>add to cart</span>
+          <ShoppingBasket className="w-5 h-5 mr-2 font-bold" />{" "}
+          <span>add to cart</span>
         </button>
       </div>
     );

@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, } from "react";
 import { ProductContext } from "./SharedContext";
 const ShopContext=function({children})
 {
@@ -22,27 +22,28 @@ window.localStorage.setItem("cart",JSON.stringify(cart))
         if (isNaN(isNo)) {
           return acc;
         }
-        return acc +  isNo * sum.amount;
+        return acc + isNo * sum.amount;
 
      
       },0);
  
-      setTotal(total); 
+ setTotal(total); 
      
     
   },[cart]);
-  useEffect(() =>
-  {
-        if(cart){
-  const amount=cart.reduce((acc,sum) =>
-      {
+
+  useEffect(() => {
+    if (cart.length > 0) {
+      const amount = cart.reduce((acc, sum) => {
         return acc + sum.amount;
-      },0)
-          setQuantity(amount);
-      
+      }, 0);
+setQuantity(amount);
+    } else {
+      return;
     }
-}
-  ,[cart]);
+  },[cart]);
+  
+
   const addCart=(product,id) =>
   {
     const newItem={...product,amount: 1};
@@ -53,11 +54,11 @@ window.localStorage.setItem("cart",JSON.stringify(cart))
     if(cartItem) {
       const newCart=[cartItem].map((item) =>
       {
-        if(item.id===id) {
+        if(item) {
           return {...item,amount: cartItem.amount + 1};
         } else {return item}
       });
-      setCart(newCart);
+  setCart(newCart);
     }
     else {
       setCart([...cart,newItem]);
@@ -66,38 +67,48 @@ window.localStorage.setItem("cart",JSON.stringify(cart))
 
   const clearall = () => {
     setCart([]);
+    window.localStorage.removeItem("cart");
+  
   };
   const del = (id) => {
     const newCart = cart.filter((item) => {
       return item.id !== id;
     });
     setCart(newCart);
+  
   };
   const increaseQuantity = (id) => {
-    const cartItem = cart.find((item) => {
-      return item.id===id;
-    });
-    addCart(cartItem, id);
+    const cartItem=cart.map((item) =>
+    {
+   return item.id === id?{ ...item,amount:item.amount + 1} : item
+  })
+
+    setCart(cartItem);
   };
-  const decreaseQuantity = (id)=>{
-          const cartItem=  cart.find((item)=>{
-       return item.id === id
-        }) 
-        if(cartItem){
-          const newCart=[cartItem].map((item) =>
-          {
-            if(item.id===id) {
-              return {...item,amount: cartItem.amount-1};
-            } else {
-              return item;
-            }
-          }); setCart(newCart)
+  const decreaseQuantity=(id) =>
+  {
+       
+    const cartItem=cart.map((item) =>
+    {
+      if(item.id===id) {
+          if (item.amount <= 0) {
+            del(id);
           }
-          else{
-            if(cartItem.amount < 2){
-            del(id)
-            }}
-            }
+        return {...item,amount: item.amount-1};
+   
+      } else {
+         if (item.amount <= 0) {
+           del(id);
+         }
+        return item;
+        
+      }
+    
+    });
+    setCart(cartItem)
+  }
+    
+ 
 
   return (
     <>

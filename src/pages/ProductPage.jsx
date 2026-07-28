@@ -17,9 +17,10 @@ const ProductPage=() =>
   const {image, product, price, category} = products;
   const [toast, setToast] = useState(false);
   useEffect(() => {
-  setTimeout(() => {
+  const out=setTimeout(() => {
     setToast(false);
-  }, 3000);
+  },5000);
+    return ()=> clearTimeout(out)
   },[toast])
   return (
     <>

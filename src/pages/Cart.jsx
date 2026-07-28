@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Footer from "../components/Footer";
 import CartBox from "../components/CartBox";
+import {Pro} from "../components/UserLink";
 const Cart = () => {
     
   const {cart,
@@ -105,6 +106,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
+      <Pro/>
       <Footer />
     </>
   );

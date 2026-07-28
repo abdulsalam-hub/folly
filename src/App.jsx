@@ -12,11 +12,14 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import ProductPage from "./pages/ProductPage.jsx";
 import Register from "./pages/Resgister.jsx";
 import SearchItems from "./pages/SearchItems.jsx";
+
+
 function App() {
 
   return (
     <>
       <Router>
+        
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path="/products" element={<Home />} />
@@ -25,7 +28,7 @@ function App() {
           <Route path="/folly/:id" element={<ProductPage />} />
           <Route path="signup" element={<Register />} />
           <Route path="/cart" element={<Cart />} />
-         
+
           <Route path="/searchproduct" element={<SearchItems/> } />
         </Routes>
       </Router>

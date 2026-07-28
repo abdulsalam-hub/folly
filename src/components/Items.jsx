@@ -1,9 +1,36 @@
-
+import black from '../assets/productImages/blacktop.jpeg';
+import manTop from "../assets/productImages/mantop.jpeg";
+import shirt from "../assets/productImages/shirt.jpeg";
+import whitetop from "../assets/productImages/whitetop.jpeg";
+import straittop from "../assets/productImages/straittop.jpeg";
+import redcoat from "../assets/productImages/redcoat.jpeg";
+import whitesuit from "../assets/productImages/whitesuit.jpeg";
+import blackcoat from "../assets/productImages/blackcoat.jpeg";
+import blackjacket from "../assets/productImages/blackjacket.jpeg";
+import silicon from "../assets/productImages/blackjean.jpeg";
+import brown from "../assets/productImages/brownsweater.jpeg";
+import paparazi from "../assets/productImages/whitehood.jpeg";
+import track from "../assets/productImages/track.jpeg";
+import whitecap from "../assets/productImages/whitecap.jpeg";
+import roadcap from "../assets/productImages/raodcap.jpeg";
+import hat from "../assets/productImages/hat.jpeg";
+import oneleg from "../assets/productImages/oneleg.jpeg";
+import greyhat from "../assets/productImages/grayhat.jpeg";
+import goldfendi from "../assets/productImages/goldfendi.jpeg";
+import grayback from "../assets/productImages/grayback.jpeg";
+import beachat from "../assets/productImages/beachhat.jpeg";
+import blackbag from "../assets/productImages/blackbag.jpeg";
+import yelback from "../assets/productImages/yelback.jpg";
+import bluejean from "../assets/productImages/bluejean.jpeg";
+import goldbag from "../assets/productImages/goldbag.jpeg";
+import acess from "../assets/productImages/acess.jpeg";
+import whitesweater from "../assets/productImages/whitesweater.jpeg";
+import browntrouser from "../assets/productImages/browntrouser.jpeg";
 export const productData = [
   {
     id: 1,
   
-    image: "/src/assets/productImages/blacktop.jpeg",
+    image: black,
     product: "gucci yirin shirt",
     price: "44",
     category: 4,
@@ -11,7 +38,7 @@ export const productData = [
   },
   {
     id: 2,
-    image: "/src/assets/productImages/mantop.jpeg",
+    image: manTop,
     product: "culture unique top",
     price: "25",
     category: 1,
@@ -19,7 +46,7 @@ export const productData = [
   },
   {
     id: 3,
-    image: "./src/assets/productImages/shirt.jpeg",
+    image: shirt,
     product: "dc white shirt",
     price: "24",
     category: 2,
@@ -27,7 +54,7 @@ export const productData = [
   },
   {
     id: 4,
-    image: "/src/assets/productImages/whitetop.jpeg",
+    image: whitetop,
     product: "zara filtz",
     price: "18",
     category: 2,
@@ -35,7 +62,7 @@ export const productData = [
   },
   {
     id: 5,
-    image: "/src/assets/productImages/straittop.jpeg",
+    image: straittop,
     product: " dolce.G wears",
     price: "119",
     category: 4,
@@ -43,7 +70,7 @@ export const productData = [
   },
   {
     id: 6,
-    image: "/src/assets/productImages/redcoat.jpeg",
+    image: redcoat,
     product: "amiri red coat",
     price: "85",
     category: 5,
@@ -51,7 +78,7 @@ export const productData = [
   },
   {
     id: 7,
-    image: "/src/assets/productImages/whitesuit.jpeg",
+    image: whitesuit,
     product: "suit dior",
     price: "110",
     category: 5,
@@ -59,7 +86,7 @@ export const productData = [
   },
   {
     id: 8,
-    image: "/src/assets/productImages/blackcoat.jpeg",
+    image:blackcoat,
     product: "corona suit coat",
     price: "60",
     category: 4,
@@ -67,7 +94,7 @@ export const productData = [
   },
   {
     id: 9,
-    image: "/src/assets/productImages/blackjacket.jpeg",
+    image: blackjacket,
     product: "arial dude shirt",
     price: "55",
     category: 4,
@@ -75,7 +102,7 @@ export const productData = [
   },
   {
     id: 10,
-    image: "/src/assets/productImages/blackjean.jpeg",
+    image: silicon,
     product: "silicon quater shorts",
     price: "50",
     category: 4,
@@ -83,7 +110,7 @@ export const productData = [
   },
   {
     id: 11,
-    image: "/src/assets/productImages/brownsweater.jpeg",
+    image: brown,
     product: "bikini sweater",
     price: "37",
     category: 4,
@@ -91,7 +118,7 @@ export const productData = [
   },
   {
     id: 12,
-    image: "/src/assets/productImages/whitehood.jpeg",
+    image: paparazi,
     product: "paparazi mild hood",
     price: "300",
     category: 4,
@@ -99,7 +126,7 @@ export const productData = [
   },
   {
     id: 13,
-    image: "/src/assets/productImages/track.jpeg",
+    image: track,
     product: "adidas sport",
     price: "80",
     category: 4,
@@ -107,7 +134,7 @@ export const productData = [
   },
   {
     id: 14,
-    image: "/src/assets/productImages/whitecap.jpeg",
+    image: whitecap,
     product: "balenciaga cap",
     price: "61",
     category: 4,
@@ -115,7 +142,7 @@ export const productData = [
   },
   {
     id: 15,
-    image: "/src/assets/productImages/raodcap.jpeg",
+    image: roadcap,
     product: "poztor sport face",
     price: "24",
     category: 4,
@@ -123,7 +150,7 @@ export const productData = [
   },
   {
     id: 16,
-    image: "/src/assets/productImages/hat.jpeg",
+    image:hat,
     product: "english beach bit",
     price: "40",
     category: 4,
@@ -131,7 +158,7 @@ export const productData = [
   },
   {
     id: 17,
-    image: "/src/assets/productImages/oneleg.jpeg",
+    image: oneleg,
     product: "amiri jeans",
     price: "40",
     category: 4,
@@ -139,7 +166,7 @@ export const productData = [
   },
   {
     id: 18,
-    image: "/src/assets/productImages/grayhat.jpeg",
+    image:greyhat,
     product: "apache loom",
     price: "60",
     category: 4,
@@ -147,7 +174,7 @@ export const productData = [
   },
   {
     id: 19,
-    image: "/src/assets/productImages/goldfendi.jpeg",
+    image:goldfendi,
     product: "fendi (special) outfit",
     price: "1000",
     category: 4,
@@ -155,7 +182,7 @@ export const productData = [
   },
   {
     id: 20,
-    image: "/src/assets/productImages/grayback.jpeg",
+    image: grayback,
     product: "tochhi bag",
     price: "80",
     category: 4,
@@ -163,7 +190,7 @@ export const productData = [
   },
   {
     id: 21,
-    image: "/src/assets/productImages/beachhat.jpeg",
+    image: beachat,
     product: "italy beach hat",
     price: "40",
     category: 4,
@@ -171,7 +198,7 @@ export const productData = [
   },
   {
     id: 22,
-    image: "/src/assets/productImages/blackbag.jpeg",
+    image: blackbag,
     product: "louis vuitton bag",
     price: "80",
     category: 4,
@@ -179,7 +206,7 @@ export const productData = [
   },
   {
     id: 23,
-    image: "/src/assets/productImages/yelback.jpg",
+    image: yelback,
     product: "mary chris suits",
     price: "200",
     category: 4,
@@ -187,7 +214,7 @@ export const productData = [
   },
   {
     id: 24,
-    image: "/src/assets/productImages/bluejean.jpeg",
+    image: bluejean,
     product: "calvin klein blue jean",
     price: "95",
     category: 4,
@@ -195,7 +222,7 @@ export const productData = [
   },
   {
     id: 25,
-    image: "/src/assets/productImages/grayback.jpeg",
+    image: grayback,
     product: "tochhi bag",
     price: "80",
     category: 4,
@@ -203,7 +230,7 @@ export const productData = [
   },
   {
     id: 26,
-    image: "/src/assets/productImages/browntrouser.jpeg",
+    image: browntrouser,
     product: "chinos cruise",
     price: "75",
     category: 4,
@@ -211,7 +238,7 @@ export const productData = [
   },
   {
     id: 27,
-    image: "/src/assets/productImages/grayback.jpeg",
+    image: grayback,
     product: "tochhi bag",
     price: "80",
     category: 4,
@@ -219,7 +246,7 @@ export const productData = [
   },
   {
     id: 28,
-    image: "/src/assets/productImages/goldbag.jpeg",
+    image: goldbag,
     product: "amiri gold bag",
     price: "350",
     category: 4,
@@ -227,7 +254,7 @@ export const productData = [
   },
   {
     id: 29,
-    image: "/src/assets/productImages/acess.jpeg",
+    image: acess,
     product: "pagani accessories",
     price: "100",
     category: 4,
@@ -235,7 +262,7 @@ export const productData = [
   },
   {
     id: 30,
-    image: "/src/assets/productImages/whitesweater.jpeg",
+    image: whitesweater,
     product: "zaraman white hood",
     price: "125",
     category: 4,
