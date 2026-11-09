@@ -1,76 +1,48 @@
-import React,{useContext} from 'react'
-import {Link} from "react-router-dom";
-import {ShoppingBasket,Heart,Star} from "lucide-react";
-import {ProductContext} from "./SharedContext";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { ShoppingBasket, Heart } from "lucide-react";
+import { ProductContext } from "./SharedContext";
 
-const ProductBox = ({id,image,product,price,category,isStocked,pro,color,wish}) => {
-  
-  const {addCart} =useContext(ProductContext);
-    return (
-      <div className="my-2 h-auto max-h-90 min-h-60   border hover:shadow-xl overflow-hidden w-auto border-amber-600 rounded-lg hover:translate-0.5 transition-all">
-        <Link to={`/folly/${id}`}>
-          {" "}
-          <img
-            src={image}
-            alt={product}
-            loading="lazy"
-            title={`more about ${product} & documentation`}
-            className="w-full h-[51%] backdrop:brightness-50 cursor-pointer rounded hover:scale-105 object-center object-cover"
-          />
-        </Link>
+const ProductBox = ({ id, image, product, price, isStocked, pro, color, wish = () => {} }) => {
+  const { addCart } = useContext(ProductContext);
 
-        <div className="w-full h-[32%] px-2">
-          <div className=" w-full py-2 ">
-            <h4 className="font-bold text-center font-sans text-[clamp(1.3rem,2vw,1.5rem)] capitalize">
-              {product}
-            </h4>
-          </div>
-          <div className="flex justify-between  items-center">
-            <h4 className="font-semibold font-sans text-[18px] text-black-600">
-              ${price}
-            </h4>
+  return (
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <Link to={`/folly/${id}`} className="relative block overflow-hidden bg-slate-50">
+        <img
+          src={image}
+          alt={product}
+          loading="lazy"
+          decoding="async"
+          className="h-44 w-full object-contain p-3 transition duration-500 group-hover:scale-105 sm:h-56"
+        />
+        <span className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide ${isStocked ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-600"}`}>
+          {isStocked ? "Available" : "Out of stock"}
+        </span>
+      </Link>
 
-            <span>
-              <Heart
-                name="heart"
-                className={`w-5 h-5 cursor-pointer  text-xm text-amber-500 ${
-                  color && "fill-red-500"
-                }`}
-                onClick={() => wish(id)}
-              />
-            </span>
-          </div>
-
-          <div className="flex justify-between items-center text-xm">
-            <h4
-              className={`text-black font-bold ${
-                isStocked ? "text-purple-500" : "text-red-600"
-              }`}
-            >
-              {category}
-              <span className="text-[10px] font-thin text-slate-500">
-                {" "}
-                left
-              </span>
-            </h4>
-            <span className="font-semibold font-sans flex gap-x-2">
-              <Star className="w-3 h-3 text-amber-500 border-amber-600 fill-amber-400" />
-              <Star className="w-3 h-3  text-amber-500 border-amber-600 fill-amber-400" />
-              <Star className="w-3 h-3  text-amber-500 border-amber-600 fill-amber-400" />
-              <Star className="w-3 h-3  text-amber-500 border-amber-600 fill-amber-400" />
-            </span>
-          </div>
+      <div className="flex flex-1 flex-col p-3 sm:p-4">
+        <div className="flex items-start justify-between gap-2">
+          <Link to={`/folly/${id}`} className="line-clamp-2 min-h-10 flex-1 text-sm font-bold capitalize text-slate-900 hover:text-purple-700 sm:text-base">
+            {product}
+          </Link>
+          <button type="button" onClick={() => wish(id)} aria-label={color ? "Remove from wishlist" : "Add to wishlist"} aria-pressed={Boolean(color)} className="rounded-full p-1.5 text-rose-500 transition hover:bg-rose-50">
+            <Heart className={`h-5 w-5 ${color ? "fill-rose-500" : ""}`} />
+          </button>
         </div>
+        <strong className="mt-2 text-base font-extrabold text-slate-900">${Number(price).toFixed(2)}</strong>
         <button
-          title="add to cart"
+          type="button"
+          disabled={!isStocked}
           onClick={() => addCart(pro, id)}
-          className="bg-purple-600  w-[90%] flex items-center   mx-auto cursor-pointer text-xs justify-center mt-3.5 py-2 font-bold text-amber-500  text-center  font-[sans-serif,tahoma] transition-all  rounded-[5px] hover:scale-102"
+          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-purple-700 px-3 py-2.5 text-xs font-bold text-white transition hover:bg-purple-800 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500"
         >
-          <ShoppingBasket className="w-5 h-5 mr-2 font-bold" />{" "}
-          <span>add to cart</span>
+          <ShoppingBasket className="h-4 w-4" />
+          {isStocked ? "Add to cart" : "Unavailable"}
         </button>
       </div>
-    );
-}
+    </article>
+  );
+};
 
-export default ProductBox
+export default ProductBox;
