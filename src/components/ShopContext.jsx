@@ -5,7 +5,9 @@ const CART_STORAGE_KEY = "folly-market-cart";
 
 const readCart = () => {
   try {
-    const savedCart = window.localStorage.getItem(CART_STORAGE_KEY);
+    const savedCart =
+      window.localStorage.getItem(CART_STORAGE_KEY) ||
+      window.localStorage.getItem("cart");
     const parsed = savedCart ? JSON.parse(savedCart) : [];
     if (!Array.isArray(parsed)) return [];
     return parsed
