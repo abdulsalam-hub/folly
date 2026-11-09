@@ -1,114 +1,72 @@
-import {useContext} from "react";
-import {ProductContext} from "../components/SharedContext";
-import {Link} from "react-router-dom";
-
-import {
-  ArrowLeft,
-
-  FormIcon,
-
-  Trash2Icon
-} from "lucide-react";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft, ClipboardList, Trash2 } from "lucide-react";
 import Footer from "../components/Footer";
 import CartBox from "../components/CartBox";
-import {Pro} from "../components/UserLink";
+import { ProductContext } from "../components/SharedContext";
+
 const Cart = () => {
-    
-  const {cart,
-    total,
-    quantity,
-    clearall} = useContext(ProductContext);
-   
+  const { cart, total, quantity, clearall } = useContext(ProductContext);
+
   return (
     <>
-      <div className=" text-center transition-all duration-300 ease-linear md:overflow-hidden">
-        <div className=" bg-slate-100 items-center flex justify-around relative top-0 left-0 w-full  p-2 border-b border-amber-200">
-          <Link
-            to="/products"
-            className="items-center flex justify-center h-8 w-8 rounded-full text-3xl  bg-transparent hover:bg-slate-300 hover:shadow-xl"
-          >
-            <ArrowLeft className="h-6 w-6" />
+      <main className="min-h-screen bg-slate-50 pb-24">
+        <header className="sticky top-0 z-40 flex items-center justify-between border-b border-slate-200 bg-white px-4 py-4 shadow-sm md:px-8">
+          <Link to="/products" className="inline-flex items-center gap-2 text-sm font-semibold text-purple-700 hover:underline">
+            <ArrowLeft className="h-5 w-5" /> Continue shopping
           </Link>
-          <h1 className="font-serif text-center text-3xl font-bold   text-purple-400">
-            folly
-          </h1>
-          <div className="flex flex-col max-w-10 items-center">
-            <Link
-              to="/contact"
-              className="rounded-full bg-transparent hover:bg-slate-100 hover:shadow-xl text-amber-500 transition-all"
-            >
-              <FormIcon className="w-6 h-6" />
-            </Link>
-            <span className="text-xs md:text-sm font-semibold">contact</span>
-          </div>
-        </div>
-        <div className="md:flex w-full md:justify-between md:p-10 py-4 px-1">
-          <div className="border rounded p-2 w-full shadow-2xl mx-0  md:w-[60%] md:mx-5">
-            <div className="flex justify-evenly text-xl gap-5 md:py-2 border-b md:border-b-1.5 py-2  md:font-bold w-full">
-              <h1 className=" font-[tahoma,sans-serif] hover:font-bold">
-                SHOPPING CART
-              </h1>
-              <p className=" font-[tahoma,sans-serif]">ITEMS ({quantity})</p>
-              <button
-                className="items-center flex justify-center rounded-full bg-neutral-100/50 hover:bg-slate-200 h-8 w-8 
-                "
-                onClick={() => clearall()}
-              >
-                <Trash2Icon className="w-5 h-5 cursor-pointer" />
-              </button>
-            </div>
-            <div className="flex justify-around md:justify-between   py-3 capitalize md:font-bold text-xl md:gap-x-5 gap-x-3 ">
-              <span className="text-center "> products</span>
-              <span className="text-center ">quantity</span>
-              <span>price($)</span>
-              <span>total</span>
-            </div>
-            <div className="w-full overflow-y-auto">
-              {cart.length > 0 ? (
-                cart.map((item) => {
-                  return <CartBox item={item} key={item} />;
-                })
-              ) : (
-                <h1 className="text-center text-2xl font-bold font-[consolas,courier] m-auto p-2 w-full border-t">
-                  No added product to cart
-                </h1>
+          <Link to="/" className="text-2xl font-black tracking-wide text-purple-700">FOLLY</Link>
+          <Link to="/contact" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-purple-700">
+            <ClipboardList className="h-5 w-5" /> Contact
+          </Link>
+        </header>
+
+        <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 md:grid-cols-[1.6fr_1fr] md:px-8">
+          <section className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm md:p-6">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div>
+                <h1 className="text-xl font-bold text-slate-900 md:text-2xl">Your shopping cart</h1>
+                <p className="mt-1 text-sm text-slate-500">{quantity} {quantity === 1 ? "item" : "items"}</p>
+              </div>
+              {cart.length > 0 && (
+                <button type="button" onClick={clearall} className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold text-red-600 hover:bg-red-50">
+                  <Trash2 className="h-4 w-4" /> Clear cart
+                </button>
               )}
             </div>
-          </div>
-          <div className="flex-1 md:w-[40%] mt-7 gap-10 md:m-auto md:mt-auto items-center">
-            <div className="border p-2 text-justify">
-              <h1 className="font-bold md:text-xl">ITEM SUMMARY</h1>
-              <div className="flex justify-between px-5">
-                <h4 className="font-medium text-xl">items</h4>
-                <span className="font-bold">{quantity}</span>
+
+            {cart.length > 0 ? (
+              <div>
+                <div className="mt-3 hidden grid-cols-[minmax(0,1fr)_auto_auto_auto] gap-3 text-xs font-semibold uppercase tracking-wide text-slate-400 sm:grid">
+                  <span>Product</span><span>Quantity</span><span>Price</span><span>Total</span>
+                </div>
+                {cart.map((item) => <CartBox item={item} key={item.id} />)}
               </div>
-              <div className="flex justify-between px-5">
-                <h4 className="font-medium text-xl">delivery</h4>
-                <span className="font-bold">free</span>
+            ) : (
+              <div className="py-16 text-center">
+                <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-purple-50 text-purple-700"><ClipboardList className="h-7 w-7" /></div>
+                <h2 className="mt-4 text-lg font-bold text-slate-900">Your cart is empty</h2>
+                <p className="mt-1 text-sm text-slate-500">Find something you love and add it to your cart.</p>
+                <Link to="/products" className="mt-5 inline-flex rounded-full bg-purple-700 px-6 py-3 text-sm font-semibold text-white hover:bg-purple-800">Explore products</Link>
               </div>
-              <div className="flex justify-between px-5">
-                <h4 className="font-medium text-xl">Price</h4>
-                <span className="font-bold">${total}</span>
-              </div>
-              <div className="flex justify-between px-5">
-                <h4 className="font-medium text-xl">total cost</h4>
-                <span className="font-bold">${total}</span>
-              </div>
-              <div className=" self-center flex justify-center hover:font-extrabold my-2  hover:translate-x-2  ">
-                <button
-                  className="text-bold border-none rounded-[90px] 
-                px-8 py-3 bg-[#d147fb] text-bold text-sm transition-all cursor-pointer shadow-sm hover:shadow-xs duration-300 "
-                >
-                  Order
-                </button>
-              </div>
+            )}
+          </section>
+
+          <aside className="h-fit rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
+            <h2 className="text-lg font-bold text-slate-900">Order summary</h2>
+            <div className="mt-5 flex justify-between text-sm text-slate-600"><span>Items</span><span>{quantity}</span></div>
+            <div className="mt-3 flex justify-between text-sm text-slate-600"><span>Delivery</span><span>Calculated at checkout</span></div>
+            <div className="mt-4 border-t border-slate-100 pt-4">
+              <div className="flex justify-between text-base font-bold text-slate-900"><span>Subtotal</span><span>${total.toFixed(2)}</span></div>
             </div>
-          </div>
+            <p className="mt-4 text-xs leading-5 text-slate-400">Checkout and payment are not connected yet. Contact Folly to confirm product availability, delivery and payment before placing an order.</p>
+            <Link to="/contact" className="mt-5 block rounded-full bg-amber-400 px-5 py-3 text-center text-sm font-bold text-slate-900 transition hover:bg-amber-500">Contact to place an order</Link>
+          </aside>
         </div>
-      </div>
-      <Pro/>
+      </main>
       <Footer />
     </>
   );
 };
+
 export default Cart;
