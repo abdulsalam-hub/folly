@@ -1,56 +1,29 @@
-import {useContext} from "react";
-import {ProductContext} from "./SharedContext";
-import {
+import { useContext } from "react";
+import { Minus, Plus, Trash2 } from "lucide-react";
+import { ProductContext } from "./SharedContext";
 
-  MinusIcon,
-  Plus,
-  Trash,
+const CartBox = ({ item }) => {
+  const { del, increaseQuantity, decreaseQuantity } = useContext(ProductContext);
+  const { id, image, product, price, amount } = item;
 
-} from "lucide-react";
-
-const CartBox = ({item}) => {
-  const {del, increaseQuantity, decreaseQuantity} = useContext(ProductContext);
-
-  const {id, image, product, price, amount} = item;
   return (
-    <>
-      <div className="flex gap-x-2 border-t border-b my-auto justify-between p-[3px,3px,3px,0px] md:py-3 items-center md:px-3">
-        <div className="flex items-center gap-0 md:gap-x-1">
-          <button
-            className="z-50 flex justify-center cursor-pointer rounded-full transition-all duration-500 h-6 w-6
-                       hover:bg-slate-200 hover:border-1/2 border-slate-300 p-auto items-center"
-            onClick={() => del(id)}
-          >
-            <Trash className="w-4 h-4 font-black px-auto text-slate-600" />
-          </button>
-          <img src={image} alt={item.product} className="h-16 w-15 rounded" />
-          <p className="font-bold text-[10px] max-w-3">{product}</p>
-        </div>
-
-        <div className="flex gap-x-4 md:gap-x-6 items-center">
-          <button
-            className=" rounded-full font-bold bg-neutral-300 text-center cursor-pointer hover:bg-slate-100 transition-all h-6 w-5"
-            onClick={() => {
-              increaseQuantity(id);
-            }}
-          >
-            <Plus className="h-5 w-5" />
-          </button>
-          <span className="text-[16px] md:text-xl">{parseInt(amount)}</span>
-          <button
-            className="rounded-full font-bold bg-neutral-300 h-6 w-6 text-center cursor-pointer  hover:bg-slate-100  transition-all"
-            onClick={() => {
-              decreaseQuantity(id);
-            }}
-          >
-            {" "}
-            <MinusIcon className="h-5 w-5 rounded-full font-bold mx-auto flex  cursor-pointer transition-all" />
-          </button>
-        </div>
-        <span>${price}</span>
-        <span>$ {parseInt(amount * price)}</span>
+    <article className="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-3 border-b border-slate-100 py-4 text-left sm:grid-cols-[minmax(0,1fr)_auto_auto_auto]">
+      <div className="flex min-w-0 items-center gap-3">
+        <button type="button" onClick={() => del(id)} aria-label={`Remove ${product} from cart`} className="rounded-full p-2 text-slate-400 hover:bg-red-50 hover:text-red-600">
+          <Trash2 className="h-4 w-4" />
+        </button>
+        <img src={image} alt={product} loading="lazy" className="h-14 w-14 rounded-lg bg-slate-100 object-contain" />
+        <p className="truncate text-sm font-semibold text-slate-800">{product}</p>
       </div>
-    </>
+      <div className="flex items-center gap-2">
+        <button type="button" onClick={() => decreaseQuantity(id)} aria-label={`Decrease ${product} quantity`} className="rounded-full bg-slate-100 p-1.5 hover:bg-slate-200"><Minus className="h-4 w-4" /></button>
+        <span className="min-w-5 text-center text-sm font-semibold tabular-nums">{amount}</span>
+        <button type="button" onClick={() => increaseQuantity(id)} aria-label={`Increase ${product} quantity`} className="rounded-full bg-slate-100 p-1.5 hover:bg-slate-200"><Plus className="h-4 w-4" /></button>
+      </div>
+      <span className="text-sm text-slate-600">${Number(price).toFixed(2)}</span>
+      <strong className="hidden text-sm text-slate-900 sm:block">${(Number(price) * Number(amount)).toFixed(2)}</strong>
+    </article>
   );
 };
+
 export default CartBox;
