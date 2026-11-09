@@ -1,0 +1,17 @@
+{
+  "name": "Folly Market",
+  "short_name": "Folly",
+  "description": "Shop fashion, clothing, bags and accessories at Folly Market.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#6d28d9",
+  "icons": [
+    {
+      "src": "/folly.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
