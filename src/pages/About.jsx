@@ -1,103 +1,73 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { ArrowRight, BadgeCheck, HeartHandshake, Shirt, Truck } from "lucide-react";
 import NavBar from "./NavBar";
-import { User2Icon, } from "lucide-react";
+import Footer from "../components/Footer";
+
+const values = [
+  {
+    icon: Shirt,
+    title: "Style for everyday life",
+    description: "Explore clothing, bags and accessories selected to help you express your personal style."
+  },
+  {
+    icon: BadgeCheck,
+    title: "Value and quality",
+    description: "We aim to make attractive fashion choices accessible while keeping quality in view."
+  },
+  {
+    icon: HeartHandshake,
+    title: "Customer relationships",
+    description: "We value clear communication and building lasting relationships with our customers."
+  },
+  {
+    icon: Truck,
+    title: "Bulk purchase enquiries",
+    description: "Interested in larger quantities? Contact our team to discuss available products and arrangements."
+  }
+];
+
 const About = () => {
   return (
     <>
       <NavBar />
-      <section className=" relative pt-20 m-auto transition-all duration-500 ease-in-out w-full h-screen">
-        <div className="">
-          <h1 className=" text-center font-bold text-2xl text-transparent bg-clip-text bg-linear-to-r p-2 from-purple-400 to-amber-500 shadow-sm">
-            About us
-          </h1>
-          <div className="capitalize px-10 text-xl font-medium  py-10 ">
-            <p>
-              folly we are committed to deliver quality ,affordable clothings to
-              all our dearest customers . we maintain better relationship with
-              our customers of large-bulk sales.
-            </p>
-            <p>
-              at Folly we are passionate about what we do because it driven by
-              innovative design, desired to help us make our impact of
-              uniqueness in customer clothing.
-            </p>
-          </div>
-        </div>
-        <div className="py-10 m-2">
-          <div className="text-center m-auto p-2">
-            <h2 className="text-2xl font-bold font-stretch-95% ">
-              our clients
-            </h2>
-            <span className="p-1 text-xs text-shadow-xs">What they say ?</span>
-          </div>
+      <main className="min-h-screen bg-slate-50 pt-24">
+        <section className="bg-gradient-to-r from-purple-950 via-purple-800 to-slate-900 px-5 py-16 text-center text-white md:py-24">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-300">The Folly story</p>
+          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-black md:text-6xl">Fashion should feel personal.</h1>
+          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-purple-100 md:text-base">At Folly Market, we are passionate about clothing and accessories that help people express their individuality. Our goal is to offer stylish, affordable choices and build better relationships with our customers.</p>
+          <Link to="/products" className="mt-8 inline-flex items-center gap-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-bold text-slate-950 transition hover:bg-amber-300">Explore the collection <ArrowRight className="h-4 w-4" /></Link>
+        </section>
 
-          <div className="flex flex-col md:grid grid-cols-3 mx-auto  place-items-center justify-around items-center mt-10 gap-y-2.5 ">
-            {review.map((comment, id) => {
-              return (
-                <div
-                  key={id}
-                  className="w-[180px] md:h-[250px] h-180px  rounded border border-purple-400  p-3  text-center"
-                >
-                  <button className="ring-2 ring-amber-300 p-1 my-3.5  rounded-full ">
-                    <User2Icon className="h-6 w-6 text-center hover:fill-purple-300" />
-                  </button>
-                  <p className="text-justify text-sx font-medium py-2 ">
-                    {comment.title}
-                  </p>
-                  <span className="font-[cursive,consolas] text-purple-400 mt-4">
-                    {" "}
-                    {comment.person}
-                  </span>
-                </div>
-              );
-            })}
+        <section className="mx-auto max-w-7xl px-5 py-14 md:px-8 md:py-20">
+          <div className="mx-auto mb-10 max-w-2xl text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-purple-600">What matters to us</p>
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900">A thoughtful way to shop</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-500">Our focus is simple: make discovering fashion easier and make every customer interaction count.</p>
           </div>
-        </div>
-        <div className="  w-full p-2 md:p-5 items-center text-center sticky bottom-0 right-0 text-sm bg-slate-200 border-t">
-          <span className="font-semibold m-auto">
-            partner with us for bulk product purchase :{" "}
-            <span className="text-xm font-bold block md:inline">
-              +234 8021289677
-            </span>{" "}
-          </span>
-          <button className="md:p-3 p-2 text-center items-center border-none rounded ml-10 hover:bg-amber-600 hover:shadow-xl  bg-amber-400 text-white cursor-pointer transition-all">
-            <Link
-              to="/contact"
-              className="hover:font-medium hover:translate-1 hover:scale-120"
-            >
-              get Started
-            </Link>
-          </button>
-        </div>{" "}
-      </section>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {values.map(({ icon: Icon, title, description }) => (
+              <article key={title} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-purple-50 text-purple-700"><Icon className="h-6 w-6" /></div>
+                <h3 className="mt-5 text-lg font-bold text-slate-900">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-500">{description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto mb-16 max-w-5xl px-5">
+          <div className="flex flex-col items-start justify-between gap-5 rounded-3xl bg-amber-100 p-7 sm:flex-row sm:items-center md:p-10">
+            <div>
+              <h2 className="text-2xl font-extrabold text-slate-900">Looking for something specific?</h2>
+              <p className="mt-2 max-w-xl text-sm leading-6 text-slate-600">Talk to us about product availability, bulk purchases or any questions you have.</p>
+            </div>
+            <Link to="/contact" className="shrink-0 rounded-full bg-purple-700 px-6 py-3 text-sm font-bold text-white hover:bg-purple-800">Contact Folly</Link>
+          </div>
+        </section>
+      </main>
+      <Footer />
     </>
   );
 };
+
 export default About;
-const review = [
-  {
-    title:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemoimpedit!",
-    person: " smith forge"
-  },
-  {
-    title:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemoimpedit!",
-    person: "MISS ola"
-  },
-  {
-    title:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemoimpedit!",
-    person: "Mrs Cole"
-  },
-  {
-    title:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemoimpedit!",
-    person: "MR john"
-  },
-  {
-    title:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemoimpedit!",
-    person: "madame Shade"
-  }
-];
