@@ -1,132 +1,88 @@
-import {useState, useEffect, } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ProductContext } from "./SharedContext";
-const ShopContext=function({children})
-{
-  const [cart,setCart]=useState(() =>
-  {
-    const savedCart=window.localStorage.getItem("cart");
-  return  savedCart ? JSON.parse(savedCart) : []
-  });
-  const [quantity,setQuantity]=useState(0);
-  const [total,setTotal]=useState(0);
-  useEffect(() =>
-  {
-window.localStorage.setItem("cart",JSON.stringify(cart))
-    
-},[cart])
-  useEffect(() =>
-  {        
-        const total=cart.reduce((acc,sum) =>
-      {
-        const isNo=parseFloat(sum.price);
-        if (isNaN(isNo)) {
-          return acc;
-        }
-        return acc + isNo * sum.amount;
 
-     
-      },0);
- 
- setTotal(total); 
-     
-    
-  },[cart]);
+const CART_STORAGE_KEY = "folly-market-cart";
+
+const readCart = () => {
+  try {
+    const savedCart = window.localStorage.getItem(CART_STORAGE_KEY);
+    const parsed = savedCart ? JSON.parse(savedCart) : [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .filter((item) => item && item.id !== undefined && Number.isFinite(Number(item.price)))
+      .map((item) => ({ ...item, amount: Math.max(1, Number(item.amount) || 1) }));
+  } catch {
+    return [];
+  }
+};
+
+const ShopContext = ({ children }) => {
+  const [cart, setCart] = useState(readCart);
 
   useEffect(() => {
-    if (cart.length > 0) {
-      const amount = cart.reduce((acc, sum) => {
-        return acc + sum.amount;
-      }, 0);
-setQuantity(amount);
-    } else {
-      return;
+    try {
+      window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    } catch (error) {
+      console.warn("Folly Market could not save the cart locally.", error);
     }
-  },[cart]);
-  
+  }, [cart]);
 
-  const addCart=(product,id) =>
-  {
-    const newItem={...product,amount: 1};
-    const cartItem=cart.find((item) =>
-    {
-      return item.id===id;
-    });
-    if(cartItem) {
-      const newCart=[cartItem].map((item) =>
-      {
-        if(item) {
-          return {...item,amount: cartItem.amount + 1};
-        } else {return item}
-      });
-  setCart(newCart);
-    }
-    else {
-      setCart([...cart,newItem]);
-    }
-  }
+  const quantity = useMemo(
+    () => cart.reduce((sum, item) => sum + Math.max(0, Number(item.amount) || 0), 0),
+    [cart]
+  );
 
-  const clearall = () => {
-    setCart([]);
-    window.localStorage.removeItem("cart");
-  
-  };
-  const del = (id) => {
-    const newCart = cart.filter((item) => {
-      return item.id !== id;
-    });
-    setCart(newCart);
-  
-  };
-  const increaseQuantity = (id) => {
-    const cartItem=cart.map((item) =>
-    {
-   return item.id === id?{ ...item,amount:item.amount + 1} : item
-  })
+  const total = useMemo(
+    () => cart.reduce((sum, item) => sum + (Number(item.price) || 0) * (Number(item.amount) || 0), 0),
+    [cart]
+  );
 
-    setCart(cartItem);
-  };
-  const decreaseQuantity=(id) =>
-  {
-       
-    const cartItem=cart.map((item) =>
-    {
-      if(item.id===id) {
-          if (item.amount <= 0) {
-            del(id);
-          }
-        return {...item,amount: item.amount-1};
-   
-      } else {
-         if (item.amount <= 0) {
-           del(id);
-         }
-        return item;
-        
+  const addCart = (product, id = product?.id) => {
+    if (!product || id === undefined || !Number.isFinite(Number(product.price))) return;
+    setCart((current) => {
+      const existing = current.find((item) => String(item.id) === String(id));
+      if (existing) {
+        return current.map((item) =>
+          String(item.id) === String(id)
+            ? { ...item, amount: (Number(item.amount) || 0) + 1 }
+            : item
+        );
       }
-    
+      return [...current, { ...product, id, amount: 1 }];
     });
-    setCart(cartItem)
-  }
-    
- 
+  };
+
+  const clearall = () => setCart([]);
+  const del = (id) =>
+    setCart((current) => current.filter((item) => String(item.id) !== String(id)));
+
+  const increaseQuantity = (id) =>
+    setCart((current) =>
+      current.map((item) =>
+        String(item.id) === String(id)
+          ? { ...item, amount: (Number(item.amount) || 0) + 1 }
+          : item
+      )
+    );
+
+  const decreaseQuantity = (id) =>
+    setCart((current) =>
+      current
+        .map((item) =>
+          String(item.id) === String(id)
+            ? { ...item, amount: (Number(item.amount) || 1) - 1 }
+            : item
+        )
+        .filter((item) => item.amount > 0)
+    );
 
   return (
-    <>
-      <ProductContext.Provider
-        value={{
-          addCart,
-          cart,
-          total,
-          quantity,
-          del,
-          increaseQuantity,
-          decreaseQuantity,
-          clearall
-        }}
-      >
-        {children}
-      </ProductContext.Provider>
-    </>
-  )
+    <ProductContext.Provider
+      value={{ addCart, cart, total, quantity, del, increaseQuantity, decreaseQuantity, clearall }}
+    >
+      {children}
+    </ProductContext.Provider>
+  );
 };
+
 export default ShopContext;
